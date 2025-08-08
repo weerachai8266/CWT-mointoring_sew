@@ -1,0 +1,56 @@
+{
+    "F/C": {
+        "display_name": "F/C",
+        "sewing_table": "sewing_fc",
+        "qc_table": "qc_fc",
+        "target_field": "fc",
+        "man_plan_field": "fc_plan",
+        "man_act_field": "fc_act",
+        "qc_ng_field": "F/C"
+    },
+    "F/B": {
+        "display_name": "F/B",
+        "sewing_table": "sewing_fb",
+        "qc_table": "qc_fb",
+        "target_field": "fb",
+        "man_plan_field": "fb_plan",
+        "man_act_field": "fb_act",
+        "qc_ng_field": "F/B"
+    },
+    "R/C": {
+        "display_name": "R/C",
+        "sewing_table": "sewing_rc",
+        "qc_table": "qc_rc",
+        "target_field": "rc",
+        "man_plan_field": "rc_plan",
+        "man_act_field": "rc_act",
+        "qc_ng_field": "R/C"
+    },
+    "R/B": {
+        "display_name": "R/B",
+        "sewing_table": "sewing_rb",
+        "qc_table": "qc_rb",
+        "target_field": "rb",
+        "man_plan_field": "rb_plan",
+        "man_act_field": "rb_act",
+        "qc_ng_field": "R/B"
+    },
+    "3RD": {
+        "display_name": "3RD",
+        "sewing_table": "sewing_3rd",
+        "qc_table": "qc_3rd",
+        "target_field": "3rd",
+        "man_plan_field": "3rd_plan",
+        "man_act_field": "3rd_act",
+        "qc_ng_field": "3RD"
+    },
+    "SUB": {
+        "display_name": "Sub Assy",
+        "sewing_table": "sewing_sub",
+        "qc_table": "qc_sub",
+        "target_field": "sub",
+        "man_plan_field": "sub_plan",
+        "man_act_field": "sub_act",
+        "qc_ng_field": "SUB"
+    }
+}

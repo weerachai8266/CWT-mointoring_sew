@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Grab Scale
+Comment=Grab Scale Monitoring Application
+Exec=python3 /home/sewing/sewing/gui.py
+StartupNotify=false
+Terminal=true
+Hidden=false
+Categories=Utility;
