@@ -116,13 +116,54 @@ class DatabaseManager:
             return "0"
 
     def get_man_act(self):
+        # ดึงข้อมูล man_act ตามช่วงเวลาปัจจุบัน (แทนการดึงค่าล่าสุด)
+        return self.get_man_act_by_period()
+
+    def get_man_act_by_period(self):
+        # ดึงข้อมูล man_act ตามช่วงเวลาปัจจุบัน
+        
+        current_time = datetime.now().time()
+        if current_time >= time(8, 0) and current_time < time(13, 0):
+            return self.get_man_act_for_period('เช้า')
+        elif current_time >= time(13, 0) and current_time < time(17, 00):
+            return self.get_man_act_for_period('บ่าย')
+        elif current_time >= time(17, 00) and current_time < time(24, 0):
+            return self.get_man_act_for_period('OT')
+        else:
+            return 0  # นอกเวลาทำงาน
+            
+    def get_man_act_for_period(self, shift):
+        # ดึงข้อมูล man_act ตามช่วงเวลา (shift) ที่ระบุ
+        # shift: 'เช้า', 'บ่าย', หรือ 'OT'
         try:
-            sql = f"SELECT `{self.tables['man_act_field']}` FROM sewing_man_act ORDER BY created_at DESC LIMIT 1"
-            self.cursor.execute(sql)
+            # ดึงข้อมูลของวันนี้และตามช่วงเวลาที่ระบุ
+            sql = f"""
+                SELECT `{self.tables['man_act_field']}` 
+                FROM sewing_man_act 
+                WHERE DATE(created_at) = CURDATE() 
+                AND shift = %s 
+                ORDER BY created_at DESC 
+                LIMIT 1
+            """
+            self.cursor.execute(sql, (shift,))
             result = self.cursor.fetchone()
-            return str(result[0]) if result and result[0] is not None else "0"
+            
+            if result and result[0] is not None:
+                return str(result[0])
+            else:
+                # ถ้าไม่มีข้อมูลของวันนี้ ให้ลองดึงข้อมูลของวันก่อนหน้าและช่วงเวลาเดียวกัน
+                sql_previous = f"""
+                    SELECT `{self.tables['man_act_field']}` 
+                    FROM sewing_man_act 
+                    WHERE shift = %s 
+                    ORDER BY created_at DESC 
+                    LIMIT 1
+                """
+                self.cursor.execute(sql_previous, (shift,))
+                prev_result = self.cursor.fetchone()
+                return str(prev_result[0]) if prev_result and prev_result[0] is not None else "0"
         except Exception as e:
-            print(f"Error fetching man act: {e}")
+            print(f"Error fetching man act for period {shift}: {e}")
             return "0"
 
     def get_output_count_pd(self):
