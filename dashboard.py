@@ -25,7 +25,7 @@ class Dashboard:
         self.qc_show_error = False
 
         self.man_plan = self.db_manager.get_man_plan()
-        self.man_act = self.db_manager.get_man_act()
+        self.man_act = self.db_manager.get_man_act_by_period()  # ใช้ฟังก์ชันใหม่ที่ดึงตามช่วงเวลา
         self.sum_ng = self.db_manager.get_ng()
         self.output_value_pd = self.db_manager.get_output_count_pd()
         self.hourly_output = self.db_manager.get_hourly_output_detailed()
@@ -424,7 +424,7 @@ class Dashboard:
                     elif event.type == self.UPDATE_EVENT:
                         self.target_value = self.db_manager.get_target_from_cap()
                         self.man_plan = self.db_manager.get_man_plan()
-                        self.man_act = self.db_manager.get_man_act()
+                        self.man_act = self.db_manager.get_man_act_by_period()  # ใช้ฟังก์ชันใหม่ที่ดึงตามช่วงเวลา
                         self.sum_ng = self.db_manager.get_ng()
                         self.output_value_pd = self.db_manager.get_output_count_pd()
                         self.eff = round(float(self.output_value_pd) / float(self.target_value) * 100, 2) if float(self.target_value) != 0 else 0.00
