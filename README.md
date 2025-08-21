@@ -34,7 +34,7 @@ sudo apt-get install -y \
 
 ### ติดตั้ง Python packages
 ~~~ echo "📚 กำลังติดตั้ง Python libraries..."
-pip3 install evdev pymysql
+sudo apt install python3-evdev python3-pymysql
 ~~~
 
 ### เพิ่มผู้ใช้เข้ากลุ่ม input
