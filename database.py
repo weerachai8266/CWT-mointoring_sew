@@ -125,9 +125,9 @@ class DatabaseManager:
         current_time = datetime.now().time()
         if current_time >= time(8, 0) and current_time < time(13, 0):
             return self.get_man_act_for_period('เช้า')
-        elif current_time >= time(13, 0) and current_time < time(17, 00):
+        elif current_time >= time(13, 0) and current_time < time(17, 0):
             return self.get_man_act_for_period('บ่าย')
-        elif current_time >= time(17, 00) and current_time < time(24, 0):
+        elif current_time >= time(17, 0) and current_time < time(23, 0):
             return self.get_man_act_for_period('OT')
         else:
             return 0  # นอกเวลาทำงาน
