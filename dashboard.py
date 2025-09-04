@@ -117,7 +117,7 @@ class Dashboard:
             return barcode
 
     def process_qc_scan(self, barcode):
-        if barcode.startswith("NI") and len(barcode) > 12:
+        if barcode.startswith("NI") and 12 < len(barcode) <= 20:
             self.last_qc_barcode = barcode
             self.db_manager.insert_qc(barcode)
             self.qc_show_error = False
