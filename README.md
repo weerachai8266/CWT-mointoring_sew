@@ -87,10 +87,13 @@ sudo nano /etc/udev/rules.d/99-barcode.rules
 
 ### 2. วางโค้ด
 ~~~udev
-# สแกนเนอร์ OK → เสียบพอร์ต 1-1.2
+# PI3
 KERNEL=="event*", SUBSYSTEM=="input", KERNELS=="1-1.2", SYMLINK+="input/scanner1"
-# สแกนเนอร์ NG → เสียบพอร์ต 1-1.3
 KERNEL=="event*", SUBSYSTEM=="input", KERNELS=="1-1.3", SYMLINK+="input/scanner2"
+
+# PI4
+KERNEL=="event*", SUBSYSTEM=="input", KERNELS=="1-1.3", SYMLINK+="input/scanner1"
+KERNEL=="event*", SUBSYSTEM=="input", KERNELS=="1-1.4", SYMLINK+="input/scanner2"
 ~~~
 
 บันทึกและออก (Ctrl+O, Enter, แล้ว Ctrl+X)
