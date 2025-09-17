@@ -168,7 +168,7 @@ class DatabaseManager:
 
     def get_output_count_pd(self):
         try:
-            sql = f"SELECT COUNT(1) FROM `{self.tables['sewing_table']}` WHERE DATE(created_at) = CURDATE()"
+            sql = f"SELECT COUNT(1) FROM `{self.tables['sewing_table']}` WHERE DATE(created_at) = CURDATE() AND status = 10"
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             return str(result[0]) if result and result[0] is not None else "0"
@@ -178,7 +178,7 @@ class DatabaseManager:
 
     def get_output_count_qc(self):
         try:
-            sql = f"SELECT COUNT(1) FROM `{self.tables['qc_table']}` WHERE DATE(created_at) = CURDATE()"
+            sql = f"SELECT COUNT(1) FROM `{self.tables['qc_table']}` WHERE DATE(created_at) = CURDATE() AND status = 10"
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             return str(result[0]) if result and result[0] is not None else "0"
