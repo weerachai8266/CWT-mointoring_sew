@@ -168,7 +168,7 @@ class DatabaseManager:
 
     def get_output_count_pd(self):
         try:
-            sql = f"SELECT COUNT(1) FROM `{self.tables['sewing_table']}` WHERE DATE(created_at) = CURDATE() AND status = 10"
+            sql = f"SELECT COUNT(1) FROM `{self.tables['sewing_table']}` WHERE status = 10 AND DATE(created_at) = CURDATE()"
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             return str(result[0]) if result and result[0] is not None else "0"
@@ -178,7 +178,7 @@ class DatabaseManager:
 
     def get_output_count_qc(self):
         try:
-            sql = f"SELECT COUNT(1) FROM `{self.tables['qc_table']}` WHERE DATE(created_at) = CURDATE() AND status = 10"
+            sql = f"SELECT COUNT(1) FROM `{self.tables['qc_table']}` WHERE status = 10 AND DATE(created_at) = CURDATE()"
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             return str(result[0]) if result and result[0] is not None else "0"
@@ -200,7 +200,7 @@ class DatabaseManager:
         sql = f"""
             SELECT HOUR(created_at) AS hr, COUNT(*) AS pcs
             FROM {self.tables['sewing_table']}
-            WHERE DATE(created_at) = CURDATE()
+            WHERE DATE(created_at) = CURDATE() and status = 10
             GROUP BY hr
             ORDER BY hr
         """
@@ -219,7 +219,7 @@ class DatabaseManager:
         sql = f"""
             SELECT HOUR(created_at), MINUTE(created_at)
             FROM {self.tables['sewing_table']}
-            WHERE DATE(created_at) = %s
+            WHERE DATE(created_at) = %s and status = 10
         """
         self.cursor.execute(sql, (for_date,))
         results = self.cursor.fetchall()
@@ -235,7 +235,7 @@ class DatabaseManager:
         sql = f"""
             SELECT HOUR(created_at) AS hr, COUNT(*) AS pcs
             FROM {self.tables['qc_table']}
-            WHERE DATE(created_at) = CURDATE()
+            WHERE DATE(created_at) = CURDATE() and status = 10
             GROUP BY hr
             ORDER BY hr
         """
